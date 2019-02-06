@@ -13,7 +13,6 @@ public class Graph
     public Graph() {
         listMoulinConnection = new ArrayList<Connection>();
         for(int  i = 0 ; i < 24 ; i++){
-
         }
 
     }
@@ -28,6 +27,10 @@ public class Graph
         }
 
         return listConnexions;
+    }
+
+    public void ajouterConnection(Connection c){
+        listMoulinConnection.add(c);
     }
 
 }
