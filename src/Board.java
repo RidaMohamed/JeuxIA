@@ -19,6 +19,7 @@ public class Board {
         this.joueur2 = j2;
         graph = new Graph();
 
+
     }
 
     /** la fonctio qui
@@ -36,7 +37,7 @@ public class Board {
      * joueur
      * @param mouvement
      */
-    public void makeMove(Mouvement mouvement){
+    public int makeMove(Mouvement mouvement){
 
         //liste de tous les connections pour savoir si
         //un mouvement existe deja
@@ -56,6 +57,10 @@ public class Board {
             //maybe its bettr to remove listemouvement
             Connection c = new Connection(mouvement.FromNode , mouvement.ToNode , 1);
             listmouvement.add(mouvement);
+            return j ;
+        }else{
+            //mouvement deja existant (-1)
+            return  j ;
         }
 
 
