@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.windows.Controller">
+   <children>
+      <ImageView fx:id="AImag" fitHeight="29.0" fitWidth="36.0" layoutX="92.0" layoutY="6.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="400.0" fitWidth="408.0" layoutX="92.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@TableDeJeu2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="274.0" layoutY="6.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImag2" fitHeight="29.0" fitWidth="36.0" layoutX="456.0" layoutY="6.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="396.0" layoutY="186.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="212.0" layoutY="186.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="337.0" layoutY="123.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="274.0" layoutY="123.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="212.0" layoutY="123.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="396.0" layoutY="65.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="274.0" layoutY="65.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="153.0" layoutY="65.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="92.0" layoutY="364.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="274.0" layoutY="364.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="456.0" layoutY="364.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="456.0" layoutY="186.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="212.0" layoutY="244.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="92.0" layoutY="186.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="153.0" layoutY="186.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="274.0" layoutY="306.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="153.0" layoutY="306.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="396.0" layoutY="306.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="331.0" layoutY="186.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="274.0" layoutY="244.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="337.0" layoutY="244.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</Pane>

@@ -1,6 +1,5 @@
-package etat;
+package game.etat;
 
-import java.io.*;
 import java.util.ArrayList;
 
 public class Graph

@@ -1,3 +1,5 @@
+package game;
+
 public class Mouvement {
 
     public String FromNode ;

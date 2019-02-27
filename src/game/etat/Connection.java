@@ -1,4 +1,4 @@
-package etat;
+package game.etat;
 
 public class Connection {
 

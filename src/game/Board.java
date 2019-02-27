@@ -1,5 +1,7 @@
-import etat.Connection;
-import etat.Graph;
+package game;
+
+import game.etat.Connection;
+import game.etat.Graph;
 
 import java.util.ArrayList;
 
