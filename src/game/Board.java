@@ -2,6 +2,7 @@ package game;
 
 import game.etat.Connection;
 import game.etat.Graph;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ public class Board {
     protected Joueur joueur1 ;
     protected Joueur joueur2 ;
     protected Graph graph ;
+    protected ArrayList<String> listMoulin ;
 
 
     public Board(Joueur j1 , Joueur j2) {
@@ -20,6 +22,8 @@ public class Board {
         this.joueur1 = j1;
         this.joueur2 = j2;
         graph = new Graph();
+        listMoulin = new ArrayList<String>();
+
 
 
     }
@@ -105,6 +109,32 @@ public class Board {
         // retse 2 cas
 
         return etat;
+
+    }
+
+
+    public boolean caseVide(String moulin){
+
+        boolean b = true;
+
+        for (int i = 0; i <this.listMoulin.size();i++){
+            if (this.listMoulin.get(i).equals(moulin))
+                b=false;
+        }
+
+        return b;
+
+    }
+
+    public void ajouterMoulin(String moulin){
+
+        this.listMoulin.add(moulin);
+
+    }
+
+    public void removeMoulin(String moulin){
+
+        this.listMoulin.remove(moulin);
 
     }
 

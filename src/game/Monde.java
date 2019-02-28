@@ -20,7 +20,7 @@ public class Monde extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("/game/windows/GameWindow.fxml"));
         primaryStage.setTitle("Jeux de game.Moulin");
-        primaryStage.setScene(new Scene(root, 700, 600));
+        primaryStage.setScene(new Scene(root, 600, 550));
         primaryStage.show();
 
 
@@ -35,14 +35,8 @@ public class Monde extends Application {
 
         /*
 
-        Scanner midi = new Scanner(System.in);
-        System.out.println("Bienvenue ");
 
         //afficher letat initiale de jeu
-        TableDeJeu fenetreDeJeu = new TableDeJeu();
-
-        fenetreDeJeu.ajouter();
-
 
 
         while( i == -1){
@@ -86,14 +80,6 @@ public class Monde extends Application {
                     j1.setNbMouvement(j1.getNbMouvement() + 1);
 
                 }
-
-                // changer le current joueur
-                j1.setMonTour(0);
-                j2.setMonTour(1);
-
-                // reinitiialser l'affichage
-
-                i = game.isGameOver();
 
             }else {
                 System.out.println("C'est le tour de game.Joueur 2");
@@ -148,12 +134,7 @@ public class Monde extends Application {
         }
 
 
-        if ( i == 1)
-            System.out.println("joueur 1 a gagne");
-        else if (i == 2)
-            System.out.println("joueur 2 a gagne");
-        else
-            System.out.println("matche null");
+
 */
 
 
