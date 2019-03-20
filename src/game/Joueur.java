@@ -9,7 +9,10 @@ public class Joueur {
     private int nbPions;
     private int nbMouvement;
     private int nbPionsPrises;
-    private int monTour ;// 1 cad c'est le tour de ce joueur 0 non
+    private ArrayList<String> listMoulinJouee ;
+    private int monTour ;
+    private int etatPrendreMoulin = 0;// 1 cad c'est le tour de ce joueur 0 non
+    private String LastMoulin ;
 
     public Joueur(String name, int identifiant, int nbPions , int Tour) {
         this.name = name;
@@ -18,6 +21,8 @@ public class Joueur {
         this.nbMouvement = 0;
         this.nbPionsPrises = 0;
         this.monTour = Tour;
+        this.listMoulinJouee = new ArrayList<String>();
+        this.LastMoulin = "";
     }
 
     public String coup (String moulin , ArrayList listNoeuds){
@@ -74,5 +79,42 @@ public class Joueur {
 
     public void setMonTour(int monTour) {
         this.monTour = monTour;
+    }
+
+    public void ajouterMoulinJouee(String MoulinJouee) {
+        this.listMoulinJouee.add(MoulinJouee) ;
+    }
+
+    public void retirerMoulinJouee(String MoulinJouee) {
+        this.listMoulinJouee.remove(MoulinJouee) ;
+    }
+
+    public boolean rechercherMoulinJouee(String MoulinJouee) {
+        boolean b = false;
+        for (int i = 0 ; i < this.listMoulinJouee.size() ; i++){
+            if (this.listMoulinJouee.get(i).equals(MoulinJouee))
+                b = true;
+        }
+        return b;
+    }
+
+    public int getEtatPrendreMoulin() {
+        return etatPrendreMoulin;
+    }
+
+    public void setEtatPrendreMoulin(int etatPrendreMoulin) {
+        this.etatPrendreMoulin = etatPrendreMoulin;
+    }
+
+    public String getLastMoulin() {
+        return LastMoulin;
+    }
+
+    public void setLastMoulin(String lastMoulin) {
+        LastMoulin = lastMoulin;
+    }
+
+    public ArrayList<String> getListMoulinJouee() {
+        return listMoulinJouee;
     }
 }

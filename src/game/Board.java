@@ -5,6 +5,8 @@ import game.etat.Graph;
 import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Stack;
 
 
 public class Board {
@@ -14,6 +16,7 @@ public class Board {
     protected Joueur joueur2 ;
     protected Graph graph ;
     protected ArrayList<String> listMoulin ;
+    protected ArrayList<String> ListMoulinJouees;
 
 
     public Board(Joueur j1 , Joueur j2) {
@@ -23,8 +26,6 @@ public class Board {
         this.joueur2 = j2;
         graph = new Graph();
         listMoulin = new ArrayList<String>();
-
-
 
     }
 
@@ -41,39 +42,240 @@ public class Board {
     /**
      * la fonction qui enrigistre un mouvement jouer oar un des
      * joueur
-     * @param mouvement
+     * @param
      */
-    public int makeMove(Mouvement mouvement){
+    public int makeMove(String posMOmouluin , Joueur joueur){
 
-        //liste de tous les connections pour savoir si
-        //un mouvement existe deja
-        ArrayList<Connection> liste = new ArrayList<Connection>();
-        liste =graph.getConnection(mouvement.FromNode);
-        int j = 0;
+        int j = 1;
+        int i ;
+        ArrayList<Integer> ls = new ArrayList<>();
+        int i2;
+        Stack<Connection> list = graph.getConnection(posMOmouluin);
 
-        //verifier si  un mouvement existe
-        for (int i = 0 ; i< liste.size() ; i++){
-            if (liste.get(i).getToNode() == mouvement.ToNode){
-                j = -1;
+
+        while (!list.isEmpty()){
+            Connection c = list.peek();
+            i = c.getCost();
+            if ((ls.size()!=0)&&(ls.get(0) != i)&&(j==2))
+                j--;
+            ls.add(i);
+
+            //System.out.println(c.getFromNode() + " " + c.getToNode() + " " + c.getCost());
+
+            if (c.getFromNode().equals(posMOmouluin)){
+                //on travail avec ToNode
+                if (joueur.rechercherMoulinJouee(c.getToNode())){
+                    //on trouve un deuxieme moulin de meme couleur
+                    j++;
+                    Stack<Connection> list2 = graph.getConnection(c.getToNode());
+
+                    while (!list2.isEmpty()){
+                        Connection c2 = list2.peek();
+                        i2 = c2.getCost();
+
+                        if (i2 == i){
+                            if (c2.getFromNode().equals(c.getToNode())){
+                                //on travail avec ToNode
+                                if (joueur.rechercherMoulinJouee(c2.getToNode()) &&
+                                    !c2.getToNode().equals(c.getFromNode())){
+                                    j ++;
+                                    list.removeAllElements();
+                                    list2.removeAllElements();
+
+                                }else{
+                                    list2.remove(c2);
+                                    list.remove(c);
+                                }
+
+                            }else {
+                                //on travail avec FromNode
+                                if (joueur.rechercherMoulinJouee(c2.getFromNode()) &&
+                                    !c2.getFromNode().equals(c.getFromNode())){
+                                    j++;
+                                    list.removeAllElements();
+                                    list2.removeAllElements();
+                                }else {
+                                    list2.remove(c2);
+                                    list.remove(c);
+                                }
+                            }
+
+                        }else {
+                            list2.remove(c2);
+                            list.remove(c);
+                        }
+
+                    }
+                    list2.removeAllElements();
+                }else {
+                    list.remove(c);
+                }
+
+            }else {
+                //on travail avec fromNode
+                if (joueur.rechercherMoulinJouee(c.getFromNode())){
+                    //on trouve un 2 moulin de meme couleur
+                    j++;
+                    Stack<Connection> list2 = graph.getConnection(c.getFromNode());
+
+                    while (!list2.isEmpty()){
+                        Connection c2 = list2.peek();
+                        i2 = c2.getCost();
+
+                        if (i2 == i){
+                            if (c2.getFromNode().equals(c.getFromNode())){
+                                //on travail avec ToNode
+                                if (joueur.rechercherMoulinJouee(c2.getToNode()) &&
+                                    !c2.getToNode().equals(c.getToNode())){
+                                    j ++;
+                                    list.removeAllElements();
+                                    list2.removeAllElements();
+                                }else{
+                                    list2.remove(c2);
+                                }
+
+                            }else {
+                                //on travail avec FromNode
+                                if (joueur.rechercherMoulinJouee(c2.getFromNode()) &&
+                                    !c2.getFromNode().equals(c.getToNode())){
+                                    j++;
+                                    list.removeAllElements();
+                                    list2.removeAllElements();
+                                }else {
+                                    list2.remove(c2);
+                                    list.remove(c);
+                                }
+                            }
+
+
+                        }else {
+                            list2.remove(c2);
+                            list.remove(c);
+                        }
+
+                    }
+
+                    list2.removeAllElements();
+                }else {
+                    list.remove(c);
+                }
+
             }
+
         }
 
-        if ( j != -1){
-            //ca set a rien tous les 2 ensembles
-            //maybe its bettr to remove listemouvement
-            Connection c = new Connection(mouvement.FromNode , mouvement.ToNode , 1);
-            listmouvement.add(mouvement);
-            return j ;
-        }else{
-            //mouvement deja existant (-1)
-            return  j ;
-        }
 
+
+        return j;
 
     }
 
 
-    public int evaluate(){
+    public int evaluate(String a ,String b, String c){
+
+        HashMap<String , Integer> listetatnegatif = new HashMap<>();//METRE EN HASH MAP C MIEUX
+        HashMap<String , Integer> listetatpositif = new HashMap<>();//METRE EN HASH MAP C MIEUX
+        ArrayList<String> listetatneutre = new ArrayList<>();
+
+        //parcourire toutes les sommets
+        this.listMoulin = graph.getListMoulin();
+        for (int i = 0 ; i < 24 ; i++) {
+            //recuperer le premier sommet
+            String pigon = listMoulin.get(i);
+            if(this.ListMoulinJouees.contains(pigon)){
+                //cas ou le pigon choisit est present aur la table
+                if (joueur2.rechercherMoulinJouee(pigon)){
+                    //ce pigon appertiant au machine
+                    Stack<Connection> list = graph.getConnection(pigon);
+                    Connection connection = list.peek();
+                    if (connection.getFromNode().equals(pigon)){
+                        //on regarde le to node
+                        if (this.ListMoulinJouees.contains(connection.getToNode())){
+                            //case non vide
+                            if (joueur2.rechercherMoulinJouee(connection.getToNode())){
+                                //un autre pigon pour lejoueur machine
+                                //donc le cas est classe comme favoris
+                                listetatpositif.put(pigon , 2 );
+                            }else{
+                                //pigon de l'autre joueur
+                                //cas non dicider encors
+                                list.remove(connection);
+                            }
+
+                        }else {
+                            //case vide
+                            listetatpositif.put(pigon , 1);
+                        }
+                    }else {
+                        //on regarde le from node
+                    }
+                }else {
+                    //ce pigon appertiant au humaine
+                    Stack<Connection> list = graph.getConnection(pigon);
+                    Connection connection = list.peek();
+                    if (connection.getFromNode().equals(pigon)){
+                        //on regarde le to node
+                        if (this.ListMoulinJouees.contains(connection.getToNode())){
+                            //case non vide
+                            if (joueur2.rechercherMoulinJouee(connection.getToNode())){
+                                //un autre pigon pour lejoueur machine
+                                //donc le cas est classe comme favoris
+                                listetatpositif.put(pigon , 2 );
+                            }else{
+                                //pigon de l'autre joueur humaine
+                                //cas non favoris pour la mchaine
+                                listetatnegatif.put(pigon , -2);
+                            }
+
+                        }else {
+                            //case vide
+                            //faite un deuoeme parcours
+
+                        }
+                    }else {
+                        //on regarde le from node
+                    }
+
+                }
+
+            }else {
+                //cas le case est vide
+            }
+        }
+
+        ///////////////////////////////////////////////
+        Stack<Connection> list = graph.getConnection(a);
+        while (!list.empty()){
+            Connection connection = list.pop();
+            int i = list.size() - 1 ;
+            if (connection.getFromNode().equals(a)){
+
+                if (!joueur1.rechercherMoulinJouee(connection.getToNode()) &&
+                    !joueur2.rechercherMoulinJouee(connection.getToNode())){
+                    joueur2.ajouterMoulinJouee(connection.getToNode());
+                    list.removeAllElements();
+                }else {
+                    System.out.println(list.size());
+                    list.addAll(graph.getConnection(connection.getToNode()));
+                    list.remove(i);
+                    System.out.println(list.size());
+                }
+
+            }else{
+
+                if (!joueur1.rechercherMoulinJouee(connection.getFromNode())&&
+                        !joueur2.rechercherMoulinJouee(connection.getToNode())){
+                    joueur2.ajouterMoulinJouee(connection.getFromNode());
+                    list.removeAllElements();
+                }else {
+                    System.out.println(list.size());
+                    list.addAll(graph.getConnection(connection.getFromNode()));
+                    list.addAll(graph.getConnection(connection.getFromNode()));System.out.println(list.size());
+
+                    list.remove(i);
+                }
+            }
+        }
         return 0;
     }
 
@@ -97,15 +299,15 @@ public class Board {
      */
     public int isGameOver(){
 
-        int etat = -1;//non terminé
+        int etat = -2;//non terminé
 
         if(joueur1.getNbPionsPrises() == 7)
-            etat= 1;//joueur 1 a gagné
+            etat= -3;//joueur 1 a gagné
         else if (joueur2.getNbPionsPrises() == 7)
-            etat= 2;//joueur 2 a gagné
+            etat= -4;//joueur 2 a gagné
         else if ((joueur1.getNbMouvement() == 50) && (joueur1.getNbPionsPrises() == 0)
                 &&(joueur2.getNbMouvement() == 50) && (joueur2.getNbPionsPrises() == 0))
-            etat= 1;//partie null
+            etat= -5;//partie null
         // retse 2 cas
 
         return etat;
@@ -127,15 +329,11 @@ public class Board {
     }
 
     public void ajouterMoulin(String moulin){
-
         this.listMoulin.add(moulin);
-
     }
 
     public void removeMoulin(String moulin){
-
         this.listMoulin.remove(moulin);
-
     }
 
 }

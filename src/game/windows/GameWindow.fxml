@@ -3,37 +3,84 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.windows.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.windows.Controller">
    <children>
-      <ImageView fitHeight="500.0" fitWidth="600.0" layoutX="60.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="500.0" fitWidth="600.0" layoutX="250.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@TableDeJeu2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="AImagA" fitHeight="43.0" fitWidth="43.0" layoutX="60.0" layoutY="25.0" onMouseClicked="#moveA" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagB" fitHeight="43.0" fitWidth="43.0" layoutX="289.0" layoutY="25.0" onMouseClicked="#moveB" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImag2" fitHeight="43.0" fitWidth="43.0" layoutX="517.0" layoutY="25.0" onMouseClicked="#moveC" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagN" fitHeight="43.0" fitWidth="43.0" layoutX="441.0" layoutY="254.0" onMouseClicked="#moveN" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagL" fitHeight="43.0" fitWidth="43.0" layoutX="212.0" layoutY="252.0" onMouseClicked="#moveL" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagI" fitHeight="43.0" fitWidth="43.0" layoutX="367.0" layoutY="179.0" onMouseClicked="#moveI" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagH" fitHeight="43.0" fitWidth="43.0" layoutX="289.0" layoutY="179.0" onMouseClicked="#moveH" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagG" fitHeight="43.0" fitWidth="43.0" layoutX="212.0" layoutY="179.0" onMouseClicked="#moveG" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagF" fitHeight="43.0" fitWidth="43.0" layoutX="441.0" layoutY="102.0" onMouseClicked="#moveF" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagE" fitHeight="43.0" fitWidth="43.0" layoutX="289.0" layoutY="102.0" onMouseClicked="#moveE" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagD" fitHeight="43.0" fitWidth="43.0" layoutX="138.0" layoutY="102.0" onMouseClicked="#moveD" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagV" fitHeight="43.0" fitWidth="43.0" layoutX="60.0" layoutY="482.0" onMouseClicked="#moveV" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagW" fitHeight="43.0" fitWidth="43.0" layoutX="289.0" layoutY="482.0" onMouseClicked="#moveW" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagX" fitHeight="43.0" fitWidth="43.0" layoutX="517.0" layoutY="482.0" onMouseClicked="#moveX" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagO" fitHeight="43.0" fitWidth="43.0" layoutX="517.0" layoutY="254.0" onMouseClicked="#moveO" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagP" fitHeight="43.0" fitWidth="43.0" layoutX="212.0" layoutY="329.0" onMouseClicked="#moveP" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagJ" fitHeight="43.0" fitWidth="43.0" layoutX="60.0" layoutY="254.0" onMouseClicked="#moveJ" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagK" fitHeight="43.0" fitWidth="43.0" layoutX="138.0" layoutY="254.0" onMouseClicked="#moveK" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagT" fitHeight="43.0" fitWidth="43.0" layoutX="289.0" layoutY="405.0" onMouseClicked="#moveT" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagS" fitHeight="43.0" fitWidth="43.0" layoutX="138.0" layoutY="405.0" onMouseClicked="#moveS" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagU" fitHeight="43.0" fitWidth="43.0" layoutX="441.0" layoutY="405.0" onMouseClicked="#moveU" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagM" fitHeight="43.0" fitWidth="43.0" layoutX="367.0" layoutY="254.0" onMouseClicked="#moveM" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagQ" fitHeight="43.0" fitWidth="43.0" layoutX="289.0" layoutY="329.0" onMouseClicked="#moveQ" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="AImagR" fitHeight="43.0" fitWidth="43.0" layoutX="367.0" layoutY="329.0" onMouseClicked="#moveR" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagA" fitHeight="43.0" fitWidth="43.0" layoutX="250.0" layoutY="100.0" onMouseClicked="#moveA" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagB" fitHeight="43.0" fitWidth="43.0" layoutX="479.0" layoutY="100.0" onMouseClicked="#moveB" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImag2" fitHeight="43.0" fitWidth="43.0" layoutX="707.0" layoutY="100.0" onMouseClicked="#moveC" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagN" fitHeight="43.0" fitWidth="43.0" layoutX="631.0" layoutY="329.0" onMouseClicked="#moveN" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagL" fitHeight="43.0" fitWidth="43.0" layoutX="402.0" layoutY="327.0" onMouseClicked="#moveL" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagI" fitHeight="43.0" fitWidth="43.0" layoutX="557.0" layoutY="254.0" onMouseClicked="#moveI" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagH" fitHeight="43.0" fitWidth="43.0" layoutX="479.0" layoutY="254.0" onMouseClicked="#moveH" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagG" fitHeight="43.0" fitWidth="43.0" layoutX="402.0" layoutY="254.0" onMouseClicked="#moveG" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagF" fitHeight="43.0" fitWidth="43.0" layoutX="631.0" layoutY="177.0" onMouseClicked="#moveF" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagE" fitHeight="43.0" fitWidth="43.0" layoutX="479.0" layoutY="177.0" onMouseClicked="#moveE" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagD" fitHeight="43.0" fitWidth="43.0" layoutX="328.0" layoutY="177.0" onMouseClicked="#moveD" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagV" fitHeight="43.0" fitWidth="43.0" layoutX="250.0" layoutY="557.0" onMouseClicked="#moveV" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagW" fitHeight="43.0" fitWidth="43.0" layoutX="479.0" layoutY="557.0" onMouseClicked="#moveW" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagX" fitHeight="43.0" fitWidth="43.0" layoutX="707.0" layoutY="557.0" onMouseClicked="#moveX" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagO" fitHeight="43.0" fitWidth="43.0" layoutX="707.0" layoutY="329.0" onMouseClicked="#moveO" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagP" fitHeight="43.0" fitWidth="43.0" layoutX="402.0" layoutY="404.0" onMouseClicked="#moveP" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagJ" fitHeight="43.0" fitWidth="43.0" layoutX="250.0" layoutY="329.0" onMouseClicked="#moveJ" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagK" fitHeight="43.0" fitWidth="43.0" layoutX="328.0" layoutY="329.0" onMouseClicked="#moveK" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagT" fitHeight="43.0" fitWidth="43.0" layoutX="479.0" layoutY="480.0" onMouseClicked="#moveT" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagS" fitHeight="43.0" fitWidth="43.0" layoutX="328.0" layoutY="480.0" onMouseClicked="#moveS" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagU" fitHeight="43.0" fitWidth="43.0" layoutX="631.0" layoutY="480.0" onMouseClicked="#moveU" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagM" fitHeight="43.0" fitWidth="43.0" layoutX="557.0" layoutY="329.0" onMouseClicked="#moveM" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagQ" fitHeight="43.0" fitWidth="43.0" layoutX="479.0" layoutY="404.0" onMouseClicked="#moveQ" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="AImagR" fitHeight="43.0" fitWidth="43.0" layoutX="557.0" layoutY="404.0" onMouseClicked="#moveR" pickOnBounds="true" preserveRatio="true" />
+      <Text layoutX="35.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Joueur1" textAlignment="CENTER" wrappingWidth="83.8125">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="35.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Pions prises" textAlignment="CENTER" wrappingWidth="83.8125">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="858.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Joueur2" textAlignment="CENTER" wrappingWidth="83.8125">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="858.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Pions prises" textAlignment="CENTER" wrappingWidth="83.8125">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="pionsJ1" layoutX="35.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="83.8125">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="pionsJ2" layoutX="858.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="83.8125">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="text1" layoutX="371.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Joueur" visible="false">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fx:id="text3" layoutX="522.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="a gagné" visible="false">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fx:id="text2" layoutX="495.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" visible="false">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="36.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

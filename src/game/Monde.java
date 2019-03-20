@@ -1,6 +1,7 @@
 package game;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,18 +19,12 @@ public class Monde extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/game/windows/GameWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/game/windows/menu/Menu.fxml"));
         primaryStage.setTitle("Jeux de game.Moulin");
-        primaryStage.setScene(new Scene(root, 600, 550));
+        primaryStage.setScene(new Scene(root, 200, 200));
         primaryStage.show();
 
-
-
-
     }
-
-
-
 
 
 
