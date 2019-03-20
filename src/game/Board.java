@@ -173,6 +173,8 @@ public class Board {
 
     public int evaluate(String a ,String b, String c){
 
+
+        ////////////////////////////////////////////
         HashMap<String , Integer> listetatnegatif = new HashMap<>();//METRE EN HASH MAP C MIEUX
         HashMap<String , Integer> listetatpositif = new HashMap<>();//METRE EN HASH MAP C MIEUX
         ArrayList<String> listetatneutre = new ArrayList<>();
@@ -240,6 +242,119 @@ public class Board {
 
             }else {
                 //cas le case est vide
+                Stack<Connection> list = graph.getConnection(pigon);
+                int  u = 10;
+                while (!list.empty()){
+
+                    Connection connection = list.peek();
+                    int y = connection.getCost();
+                    if(connection.getFromNode().equals(pigon)){
+                        if (this.ListMoulinJouees.contains(pigon)){
+                            if (joueur2.rechercherMoulinJouee(connection.getToNode())){
+
+                            }else {
+                                Stack<Connection> list2 = graph.getConnection(connection.getToNode());
+                                while (!list2.empty()){
+                                    Connection connection1 = list2.peek();
+                                    if (y == connection1.getCost()){
+                                        if (connection1.getFromNode().equals(connection.getToNode())){
+                                            if (this.ListMoulinJouees.contains(connection1.getToNode())){
+                                                if (joueur2.rechercherMoulinJouee(connection1.getToNode())){
+                                                    if (u == 10)
+                                                        u =0;
+                                                    list2.remove(connection1);
+                                                }else {
+                                                    listetatnegatif.put(pigon , -2);
+                                                    list2.removeAllElements();
+                                                    list.removeAllElements();
+                                                }
+                                            }else {
+                                                if (u == 10)
+                                                    u =0;
+                                                list2.remove(connection1);
+                                            }
+                                        }else {
+                                            if (this.ListMoulinJouees.contains(connection1.getFromNode())){
+                                                if (joueur2.rechercherMoulinJouee(connection1.getFromNode())){
+                                                    if (u == 10)
+                                                        u =0;
+                                                    list2.remove(connection1);
+                                                }else {
+                                                    listetatnegatif.put(pigon , -2);
+                                                    list2.removeAllElements();
+                                                    list.removeAllElements();
+                                                }
+                                            }else {
+                                                if (u == 10)
+                                                    u =0;
+                                                list2.remove(connection1);
+                                            }
+                                        }
+                                    }else {
+                                       list2.remove(connection1);
+                                    }
+                                }
+                            }
+                        }else {
+                            //ajouter
+                            u = 0 ;
+                            list.remove(connection);
+                        }
+                    }else {
+                        if (this.ListMoulinJouees.contains(pigon)){
+                            if (joueur2.rechercherMoulinJouee(connection.getFromNode())){
+
+                            }else {
+                                Stack<Connection> list2 = graph.getConnection(connection.getFromNode());
+                                while (!list2.empty()){
+                                    Connection connection1 = list2.peek();
+                                    if (y == connection1.getCost()){
+                                        if (connection1.getFromNode().equals(connection.getFromNode())){
+                                            if (this.ListMoulinJouees.contains(connection1.getToNode())){
+                                                if (joueur2.rechercherMoulinJouee(connection1.getToNode())){
+                                                    if (u == 10)
+                                                        u =0;
+                                                    list2.remove(connection1);
+                                                }else {
+                                                    listetatnegatif.put(pigon , -2);
+                                                    list2.removeAllElements();
+                                                    list.removeAllElements();
+                                                }
+                                            }else {
+                                                if (u == 10)
+                                                    u =0;
+                                                list2.remove(connection1);
+                                            }
+                                        }else {
+                                            if (this.ListMoulinJouees.contains(connection1.getFromNode())){
+                                                if (joueur2.rechercherMoulinJouee(connection1.getFromNode())){
+                                                    if (u == 10)
+                                                        u =0;
+                                                    list2.remove(connection1);
+                                                }else {
+                                                    listetatnegatif.put(pigon , -2);
+                                                    list2.removeAllElements();
+                                                    list.removeAllElements();
+                                                }
+                                            }else {
+                                                if (u == 10)
+                                                    u =0;
+                                                list2.remove(connection1);
+                                            }
+                                        }
+                                    }else {
+                                        list2.remove(connection1);
+                                    }
+                                }
+                            }
+                        }else {
+                            //ajouter
+                            u = 0 ;
+                            list.remove(connection);
+                        }
+                    }
+                }
+
             }
         }
 
