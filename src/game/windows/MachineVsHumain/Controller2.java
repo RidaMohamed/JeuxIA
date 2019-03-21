@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 import java.text.BreakIterator;
+import java.util.ArrayList;
 
 public class Controller2 {
 
@@ -113,14 +114,14 @@ public class Controller2 {
                         if (j2.rechercherMoulinJouee(posStr)){
                             j2.setLastMoulin(posStr);
                             j1.setEtatPrendreMoulin(0);
-                            game.removeMoulin(posStr);
+                            game.removeMoulinjouee(posStr);
                             played = true;
                             j1.setNbPionsPrises(j1.getNbPionsPrises() + 1);
                             idf = - 1;
                         }
                     }else {
                         if (j1.rechercherMoulinJouee(posStr)){
-                            game.removeMoulin(posStr);
+                            game.removeMoulinjouee(posStr);
                             j1.retirerMoulinJouee(posStr);
                             j1.setNbPions(j1.getNbPions()+1);
                             j1.setLastMoulin(posStr);
@@ -132,11 +133,12 @@ public class Controller2 {
 
             }else {
                 //ajouter moulin
+
                 if (j1.getEtatPrendreMoulin() == 1){
                     if (j2.rechercherMoulinJouee(posStr)){
                         j2.setLastMoulin(posStr);
                         j2.retirerMoulinJouee(posStr);
-                        game.removeMoulin(posStr);
+                        game.removeMoulinjouee(posStr);
                         j1.setEtatPrendreMoulin(0);
                         played = true;
                         j1.setNbPionsPrises(j1.getNbPionsPrises() + 1);
@@ -144,16 +146,19 @@ public class Controller2 {
                     }
                 }else {
                     if ((!j1.getLastMoulin().equals(posStr))&&(game.caseVide(posStr))){
-                        game.ajouterMoulin(posStr);
+                        //game.ajouterMoulin(posStr);
                         j1.setNbPions(j1.getNbPions()-1);
                         j1.ajouterMoulinJouee(posStr);
                         //tester si il y a 3 alignees sur une meme ligne
                         played = true;
+
                         if (game.makeMove(posStr , j1) == 3){
+
                             played = false;
                             j1.setEtatPrendreMoulin(1);
                         }
                         j1.setLastMoulin(posStr);
+                        game.ajouterMoulinJouee(posStr);
                         idf =  j1.getIdentifiant();
                     }
                 }
@@ -171,6 +176,7 @@ public class Controller2 {
                     j1.setMonTour(1);
                     j2.setMonTour(0);
                     game.evaluate(posStr  , "Z"  , "Z");
+                    j2.setNbMouvement(j2.getNbMouvement() + 1);
                 }
 
             }
@@ -194,10 +200,14 @@ public class Controller2 {
     }
 
 
+
     @FXML
     public void reinitializerVue(){
 
+        reinitialiserMoulinTransparant();
+
         for (int i = 0 ; i < j1.getListMoulinJouee().size() ; i++){
+
             switch (j1.getListMoulinJouee().get(i)){
                 case "A" :
                     AImagA.setImage(MoulinBlanc);
@@ -274,6 +284,8 @@ public class Controller2 {
 
             }
 
+
+
         }
 
         for (int i = 0 ; i < j2.getListMoulinJouee().size() ; i++){
@@ -293,6 +305,9 @@ public class Controller2 {
                     break;
                 case "E" :
                     AImagE.setImage(MoulinNoir);
+                    break;
+                case "F" :
+                    AImagF.setImage(MoulinNoir);
                     break;
                 case "G" :
                     AImagG.setImage(MoulinNoir);
@@ -351,6 +366,7 @@ public class Controller2 {
             }
 
         }
+
     }
 
     @FXML
@@ -670,6 +686,21 @@ public class Controller2 {
             reinitializerVue();
             setTextPions();
             this.gameRunning();}
+    }
+
+    @FXML
+    public void reinitialiserMoulinTransparant(){
+
+        AImagA.setImage(MoulinTranparant);AImagB.setImage(MoulinTranparant);AImag2.setImage(MoulinTranparant);
+        AImagD.setImage(MoulinTranparant);AImagE.setImage(MoulinTranparant);AImagF.setImage(MoulinTranparant);
+        AImagG.setImage(MoulinTranparant);AImagH.setImage(MoulinTranparant);AImagI.setImage(MoulinTranparant);
+        AImagJ.setImage(MoulinTranparant);AImagK.setImage(MoulinTranparant);AImagL.setImage(MoulinTranparant);
+        AImagM.setImage(MoulinTranparant);AImagN.setImage(MoulinTranparant);AImagO.setImage(MoulinTranparant);
+        AImagP.setImage(MoulinTranparant);AImagQ.setImage(MoulinTranparant);AImagR.setImage(MoulinTranparant);
+        AImagS.setImage(MoulinTranparant);AImagT.setImage(MoulinTranparant);AImagU.setImage(MoulinTranparant);
+        AImagV.setImage(MoulinTranparant);AImagW.setImage(MoulinTranparant);AImagX.setImage(MoulinTranparant);
+
+
     }
 
 }
