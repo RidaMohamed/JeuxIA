@@ -184,132 +184,75 @@ public class Board {
         for (int i = 0 ; i < 24 ; i++) {
             //recuperer le premier sommet
             String pigon = listMoulin.get(i);
-            if(this.ListMoulinJouees.contains(pigon)){
-                //cas ou le pigon choisit est present aur la table
-                if (joueur2.rechercherMoulinJouee(pigon)){
-                    //ce pigon appertiant au machine
-                    Stack<Connection> list = graph.getConnection(pigon);
-                    Connection connection = list.peek();
-                    if (connection.getFromNode().equals(pigon)){
-                        //on regarde le to node
-                        if (this.ListMoulinJouees.contains(connection.getToNode())){
-                            //case non vide
-                            if (joueur2.rechercherMoulinJouee(connection.getToNode())){
-                                //un autre pigon pour lejoueur machine
-                                //donc le cas est classe comme favoris
-                                listetatpositif.put(pigon , 2 );
-                            }else{
-                                //pigon de l'autre joueur
-                                //cas non dicider encors
-                                list.remove(connection);
-                            }
+            if(!this.ListMoulinJouees.contains(pigon)){
 
-                        }else {
-                            //case vide
-                            listetatpositif.put(pigon , 1);
-                        }
-                    }else {
-                        //on regarde le from node
-                    }
-                }else {
-                    //ce pigon appertiant au humaine
-                    Stack<Connection> list = graph.getConnection(pigon);
-                    Connection connection = list.peek();
-                    if (connection.getFromNode().equals(pigon)){
-                        //on regarde le to node
-                        if (this.ListMoulinJouees.contains(connection.getToNode())){
-                            //case non vide
-                            if (joueur2.rechercherMoulinJouee(connection.getToNode())){
-                                //un autre pigon pour lejoueur machine
-                                //donc le cas est classe comme favoris
-                                listetatpositif.put(pigon , 2 );
-                            }else{
-                                //pigon de l'autre joueur humaine
-                                //cas non favoris pour la mchaine
-                                listetatnegatif.put(pigon , -2);
-                            }
-
-                        }else {
-                            //case vide
-                            //faite un deuoeme parcours
-
-                        }
-                    }else {
-                        //on regarde le from node
-                    }
-
-                }
-
-            }else {
                 //cas le case est vide
+                //recuperer tooutes les cases vides
                 Stack<Connection> list = graph.getConnection(pigon);
-                int  u = 10;
-                while (!list.empty()){
 
-                    Connection connection = list.peek();
-                    int y = connection.getCost();
-                    if(connection.getFromNode().equals(pigon)){
-                        if (this.ListMoulinJouees.contains(pigon)){
-                            if (joueur2.rechercherMoulinJouee(connection.getToNode())){
+            int  u = 10;
+            while (!list.empty()){
+                //retirer le premier element
+                Connection connection = list.peek();
+                //recuperer le cost de l'arret
+                int y = connection.getCost();
 
-                            }else {
-                                Stack<Connection> list2 = graph.getConnection(connection.getToNode());
-                                while (!list2.empty()){
-                                    Connection connection1 = list2.peek();
-                                    if (y == connection1.getCost()){
+                if(connection.getFromNode().equals(pigon)){
+                    //on travail avec le go to node
+                    if (this.ListMoulinJouees.contains(connection.getToNode())){
+                        if (joueur2.rechercherMoulinJouee(connection.getToNode())){
+                            //recuperer toutes les connections de node
+                            Stack<Connection> list2 = graph.getConnection(connection.getToNode());
+                            while (!list2.empty()){
+                                Connection connection1 = list2.peek();
+                                if (!connection.equals(connection1)){
+                                    if (y == connection1.getCost() ){
                                         if (connection1.getFromNode().equals(connection.getToNode())){
                                             if (this.ListMoulinJouees.contains(connection1.getToNode())){
                                                 if (joueur2.rechercherMoulinJouee(connection1.getToNode())){
-                                                    if (u == 10)
-                                                        u =0;
+                                                    u = 2 ;
                                                     list2.remove(connection1);
                                                 }else {
-                                                    listetatnegatif.put(pigon , -2);
-                                                    list2.removeAllElements();
-                                                    list.removeAllElements();
+                                                    if (u==10)
+                                                    u = 0 ;
+                                                    list2.remove(connection1);
                                                 }
                                             }else {
-                                                if (u == 10)
-                                                    u =0;
-                                                list2.remove(connection1);
+                                               
                                             }
-                                        }else {
+                                        }else{
                                             if (this.ListMoulinJouees.contains(connection1.getFromNode())){
                                                 if (joueur2.rechercherMoulinJouee(connection1.getFromNode())){
-                                                    if (u == 10)
-                                                        u =0;
+                                                    u = 2 ;
                                                     list2.remove(connection1);
                                                 }else {
-                                                    listetatnegatif.put(pigon , -2);
-                                                    list2.removeAllElements();
-                                                    list.removeAllElements();
+                                                    if (u==10)
+                                                        u = 0 ;
+                                                    list2.remove(connection1);
                                                 }
                                             }else {
-                                                if (u == 10)
-                                                    u =0;
-                                                list2.remove(connection1);
+
                                             }
                                         }
+
                                     }else {
-                                       list2.remove(connection1);
+                                        list2.remove(connection1);
                                     }
+
+                                }else{
+                                    list2.remove(connection1);
                                 }
                             }
                         }else {
-                            //ajouter
-                            u = 0 ;
-                            list.remove(connection);
-                        }
-                    }else {
-                        if (this.ListMoulinJouees.contains(pigon)){
-                            if (joueur2.rechercherMoulinJouee(connection.getFromNode())){
+                            //recuperer toutes les connections de node
+                            Stack<Connection> list2 = graph.getConnection(connection.getToNode());
 
-                            }else {
-                                Stack<Connection> list2 = graph.getConnection(connection.getFromNode());
-                                while (!list2.empty()){
-                                    Connection connection1 = list2.peek();
-                                    if (y == connection1.getCost()){
-                                        if (connection1.getFromNode().equals(connection.getFromNode())){
+                            while (!list2.empty()){
+                                Connection connection1 = list2.peek();
+                                if (!connection.equals(connection1)){
+                                    //verifier que l'objet connection n'existe pas
+                                    if (y == connection1.getCost() ){
+                                        if (connection1.getFromNode().equals(connection.getToNode())){
                                             if (this.ListMoulinJouees.contains(connection1.getToNode())){
                                                 if (joueur2.rechercherMoulinJouee(connection1.getToNode())){
                                                     if (u == 10)
@@ -345,52 +288,126 @@ public class Board {
                                     }else {
                                         list2.remove(connection1);
                                     }
+                                }else {
+                                    list2.remove(connection1);
+                                }
+
+                            }
+                        }
+                    }else {
+                        //ajouter
+                        if (u == 10)
+                        u = 0 ;
+                        list.remove(connection);
+                    }
+                }else {
+                    //on travail avec le from node
+                    if (this.ListMoulinJouees.contains(connection.getFromNode())){
+                        if (joueur2.rechercherMoulinJouee(connection.getFromNode())){
+
+                            //recuperer toutes les connections de node
+                            Stack<Connection> list2 = graph.getConnection(connection.getFromNode());
+                            while (!list2.empty()){
+                                Connection connection1 = list2.peek();
+                                if (!connection.equals(connection1)){
+                                    if (y == connection1.getCost() ){
+                                        if (connection1.getFromNode().equals(connection.getFromNode())){
+                                            if (this.ListMoulinJouees.contains(connection1.getToNode())){
+                                                if (joueur2.rechercherMoulinJouee(connection1.getToNode())){
+                                                    u = 2 ;
+                                                    list2.remove(connection1);
+                                                }else {
+                                                    if (u==10)
+                                                        u = 0 ;
+                                                    list2.remove(connection1);
+                                                }
+                                            }else {
+
+                                            }
+                                        }else{
+                                            if (this.ListMoulinJouees.contains(connection1.getFromNode())){
+                                                if (joueur2.rechercherMoulinJouee(connection1.getFromNode())){
+                                                    u = 2 ;
+                                                    list2.remove(connection1);
+                                                }else {
+                                                    if (u==10)
+                                                        u = 0 ;
+                                                    list2.remove(connection1);
+                                                }
+                                            }else {
+
+                                            }
+                                        }
+                                    }else {
+                                        list2.remove(connection1);
+                                    }
+                                }else{
+                                    list2.remove(connection1);
                                 }
                             }
                         }else {
-                            //ajouter
-                            u = 0 ;
-                            list.remove(connection);
+                            //
+                            Stack<Connection> list2 = graph.getConnection(connection.getFromNode());
+
+                            while (!list2.empty()){
+                                Connection connection1 = list2.peek();
+                                if (y == connection1.getCost()){
+                                    if (connection1.getFromNode().equals(connection.getFromNode())){
+                                        if (this.ListMoulinJouees.contains(connection1.getToNode())){
+                                            if (joueur2.rechercherMoulinJouee(connection1.getToNode())){
+                                                if (u == 10)
+                                                    u =0;
+                                                list2.remove(connection1);
+                                            }else {
+                                                listetatnegatif.put(pigon , -2);
+                                                list2.removeAllElements();
+                                                list.removeAllElements();
+                                            }
+                                        }else {
+                                            if (u == 10)
+                                                u =0;
+                                            list2.remove(connection1);
+                                        }
+                                    }else {
+                                        if (this.ListMoulinJouees.contains(connection1.getFromNode())){
+                                            if (joueur2.rechercherMoulinJouee(connection1.getFromNode())){
+                                                if (u == 10)
+                                                    u =0;
+                                                list2.remove(connection1);
+                                            }else {
+                                                listetatnegatif.put(pigon , -2);
+                                                list2.removeAllElements();
+                                                list.removeAllElements();
+                                            }
+                                        }else {
+                                            if (u == 10)
+                                                u =0;
+                                            list2.remove(connection1);
+                                        }
+                                    }
+                                }else {
+                                    list2.remove(connection1);
+                                }
+                            }
                         }
+                    }else {
+                        //ajouter
+                        if (u == 10)
+                        u = 0 ;
+                        list.remove(connection);
                     }
                 }
-
             }
+
+            ///////////
+
         }
+                ///////
+        }
+        /////
 
         ///////////////////////////////////////////////
-        Stack<Connection> list = graph.getConnection(a);
-        while (!list.empty()){
-            Connection connection = list.pop();
-            int i = list.size() - 1 ;
-            if (connection.getFromNode().equals(a)){
 
-                if (!joueur1.rechercherMoulinJouee(connection.getToNode()) &&
-                    !joueur2.rechercherMoulinJouee(connection.getToNode())){
-                    joueur2.ajouterMoulinJouee(connection.getToNode());
-                    list.removeAllElements();
-                }else {
-                    System.out.println(list.size());
-                    list.addAll(graph.getConnection(connection.getToNode()));
-                    list.remove(i);
-                    System.out.println(list.size());
-                }
-
-            }else{
-
-                if (!joueur1.rechercherMoulinJouee(connection.getFromNode())&&
-                        !joueur2.rechercherMoulinJouee(connection.getToNode())){
-                    joueur2.ajouterMoulinJouee(connection.getFromNode());
-                    list.removeAllElements();
-                }else {
-                    System.out.println(list.size());
-                    list.addAll(graph.getConnection(connection.getFromNode()));
-                    list.addAll(graph.getConnection(connection.getFromNode()));System.out.println(list.size());
-
-                    list.remove(i);
-                }
-            }
-        }
         return 0;
     }
 
